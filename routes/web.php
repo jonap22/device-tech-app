@@ -20,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::resource('people', PersonController::class);
+Route::get('/people/{person}/devices', 'DeviceController@index')->name('people.devices.index');
+
 
 Route::resource('devices', DeviceController::class);
 

@@ -14,4 +14,9 @@ class Device extends Model
         return $this->belongsTo(Person::class);
     }
 
+    public function getDevicesByPerson($personId)
+    {
+        return $this->where('person_id', $personId)->get();
+    }
+
 }
