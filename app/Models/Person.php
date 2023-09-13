@@ -13,4 +13,11 @@ class Person extends Model
     {
         return $this->hasMany(Device::class);
     }
+
+    protected $fillable = [
+        'name',
+        'last_name',
+        'id_number',
+        'email'
+    ];
 }
