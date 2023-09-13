@@ -17,8 +17,7 @@
 </head>
 
 <body class="antialiased">
-
-<div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         <div class="container">
             <h1 class="font-semibold">People</h1>
             <a href="{{ route('people.create') }}" class="btn btn-primary mb-3">Create Person</a>
@@ -73,7 +72,6 @@
                 @endforeach
                 </tbody>
             </table>
-
         </div>
     </div>
 </body>

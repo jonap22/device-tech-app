@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\DeviceController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,10 +21,7 @@ Route::get('/', function () {
 });
 
 Route::resource('people', PersonController::class);
-Route::get('/people/{person}/devices', 'DeviceController@index')->name('people.devices.index');
-
-
-Route::resource('devices', DeviceController::class);
+Route::get('/people/{person}/devices', [DeviceController::class, 'index'])->name('people.devices.index');
 
 Route::get('/people', [PersonController::class, 'index'])->name('people.index');
 Route::get('/people/create', [PersonController::class, 'create'])->name('people.create');

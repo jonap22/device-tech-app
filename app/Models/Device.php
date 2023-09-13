@@ -9,6 +9,13 @@ class Device extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'mac_address',
+        'type',
+        'name',
+        'person_id',
+    ];
+
     public function person()
     {
         return $this->belongsTo(Person::class);

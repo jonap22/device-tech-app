@@ -20,63 +20,45 @@
 
 <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
     <div class="container">
-        <h1 class="font-semibold">People</h1>
-        <a href="{{ route('people.create') }}" class="btn btn-primary mb-3">Create Person</a>
+        <h1 class="font-semibold text-xl">Devices</h1>
+        <a href="{{ route('devices.create') }}" class="btn btn-primary mt-6">Create Device</a>
         <table class="min-w-full divide-y divide-gray-200">
             <thead>
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Mac Address
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Name
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Last Name
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    ID Number
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Email
-                </th>
-                <!-- Add more columns as needed -->
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
+                    Associated Person
                 </th>
             </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-            @foreach ($people as $person)
+            <tbody>
+            @foreach ($devices as $device)
                 <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $device->mac_address }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $device->type }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $device->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        {{ $person->name }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        {{ $person->last_name }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        @php
-                            $idNumber = $person->id_number;
-                            $maskedIdNumber = str_repeat('*', strlen($idNumber) - 3) . substr($idNumber, -3);
-                        @endphp
-                        {{ $maskedIdNumber }}
-                    </td>
-
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        {{ Crypt::decryptString($person->email) }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div class="space-y-1">
-                            <a href="{{ route('people.show', ['person' => $person->id]) }}" class="text-indigo-600 hover:text-indigo-900 block">View</a>
-                            <a href="{{ route('people.edit', ['person' => $person->id]) }}" class="text-yellow-600 hover:text-yellow-900 block">Edit</a>
-                            <!-- Add a delete button with a form for each record if needed -->
-                        </div>
+                        @if ($device->person)
+                            <a href="{{ route('people.show', ['person' => $device->person->id]) }}" class="text-indigo-600 hover:text-indigo-900 block">
+                                {{ $device->person->name }}
+                            </a>
+                        @else
+                            No associated person
+                        @endif
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-
     </div>
 </div>
 </body>
 </html>
-
